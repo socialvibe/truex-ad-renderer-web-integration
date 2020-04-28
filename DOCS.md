@@ -1,1 +1,1 @@
-<Placeholder for TAR API documentation>
+Placeholder for TAR API documentation
