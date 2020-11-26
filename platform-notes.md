@@ -38,17 +38,17 @@
   * Embedded videos now working fine.
   * Play only one video at a time.
   * Add videos “lazily”, we now use wrapper divs to hold the video poster, only create an actual <video> element only when we are about to do playback.
-  * Don’t invoke .play() in the same thread as creating a <video> element. We no invoke .play() about 20ms later via setTimeout().
+  * Don’t invoke .play() in the same thread as creating a <video> element. We now invoke .play() about 20ms later via setTimeout().
   * Remove <video> elements when playback is completed to save memory.
   * Remove all <video> elements when suspending an app, restore just the one needed for the current play back on resume, as per the above points.
-  * We no longer attach <audio> elements to the DOM. Playback works just fine with it detached.
+  * We no longer attach `<audio>` elements to the DOM. Playback works just fine with it detached.
   * For engagement ads we now just have one single active audio instead and one single current sound effect audio instance, that we just change the src for for different audio playbacks. Using multiple copies seem to consume more memory.
-  * For both video and audio, take care to set the .src attribute to the empty string, i.e. ‘’ when removing it. This seems to help actually unload the media itself on the PS4. 
+  * For both video and audio, take care to set the .src attribute to the empty string, i.e. `‘’` when removing it. This seems to help actually unload the media itself on the PS4. 
     * Without this I was getting consistent crashes in the CTV reference app when opening a choice card with voiceover, and returning to the main video.
-  * invert() css filters do not work on the PS4. We had to work around it using the css mask-images instead.
+  * `invert(1)` css filters do not work on the PS4. We had to work around it using the css mask-images instead.
   * For the PS4, seeking only works when the video is loaded with the duration known. Otherwise setting the video.currentTime in advance of starting playback does not work, unlike almost all other platforms.
     * This impacts resuming a video after an ad is finished, since we have to recreate the video at the position just after the ad slot.
-  * The work around is to listen to the “playing” event, and then do the initial seek then.
+    * The work around is to listen to the “playing” event, and then do the initial seek then.
 
 ## AndroidTV/FireTV
 * Does not support http: image queries when running under https
