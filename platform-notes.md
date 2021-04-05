@@ -49,6 +49,26 @@
   * For the PS4, seeking only works when the video is loaded with the duration known. Otherwise setting the video.currentTime in advance of starting playback does not work, unlike almost all other platforms.
     * This impacts resuming a video after an ad is finished, since we have to recreate the video at the position just after the ad slot.
     * The work around is to listen to the “playing” event, and then do the initial seek then.
+  
+## PS5
+Platform specific work arounds:
+* `visibilitychanged` event does not get fired on the app suspend/resume.
+  * Needed to explicit monitor these events instead via the MedaiKit api:
+  ```js
+            const msdk = window.msdk;
+            msdk.addEventListener('onBackground', this.suspendAd);
+            msdk.addEventListener('onForeground', this.resumeAd);
+            msdk.addEventListener('onSystemUI', this.suspendAd);
+            msdk.addEventListener('onAppResume', this.resumeAd);
+  ```
+
+* Sounds clips are not currently supported on the PS5, so we use .mp4 video streams instead, which do work.
+  * We now use ffmpeg to auto-create corresponding .mp4 from uploaded audio assets, typically .mp3 files.
+  
+* Like the PS4, only a single media stream can be played at once, so audio is ignored if there is another current video playing, sound effects are ignored if there is an audio or video element playback.
+
+* Audio clip invocations for unsupported sound formats block subsequent video play calls.
+  * We thus invoke sound effect play calls in a background timeout to plae them after other play() calls.
 
 ## AndroidTV/FireTV
 * Does not support http: image queries when running under https
