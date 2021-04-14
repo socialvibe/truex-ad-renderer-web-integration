@@ -90,6 +90,10 @@ Platform specific work arounds:
   * E.g. also in the Amazon Web App Tester
   * But pure native apps with a simple Web View will need to implement the ad id query natively, inject it into TAR.
   * See CTV-2152: use FireTV advertising id in vast config queries
+  * NOTE: our latest practice is to require the host app developer to pass in and desired advertising id in via the `userAdvertisingId` option to the `TruexAdRenderer` constructor.
+  
+* Video playback for Android TV would often not render unless some other part of the web page was also changing.
+  * The work around was to overlay a small div that toggle some invisible text on and off on every video time update.
 
 ## Vizio
 * Need to avoid the use of window.scrollTo to scroll large pages?
