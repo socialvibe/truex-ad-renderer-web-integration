@@ -13,8 +13,8 @@ Version 1.4.0
     * [Handling Events from TruexAdRenderer](#handling-events-from-truexadrenderer)
         * [Terminal Events](#terminal-events)
     * [Handling Ad Elimination](#handling-ad-elimination)
-* [TruexAdRenderer Roku API](#truexadrenderer-roku-api)
-    * [Reference to true\[X\] Component Library](#reference-to-the-truex-component-library)
+* [TruexAdRenderer Web API](#truexadrenderer-web-api)
+    * [Installing true[X] Library](#installing-truex-library)
     * [`TruexAdRenderer` Input Events](#truexadrenderer-input-events)
         * [`init`](#init)
         * [`start`](#start)
@@ -29,10 +29,8 @@ Version 1.4.0
     * [`TruexAdRenderer` Output Events -- Informative](#truexadrenderer-output-events----informative)
         * [`optIn`](#optin)
         * [`optOut`](#optout) 
-        * [`adsAvailable`](#adsavailable)
         * [`skipCardShown`](#skipcardshown) 
         * [`userCancel`](#usercancel) 
-        * [`videoEvent`](#videoevent) 
 
 ## Overview
 
