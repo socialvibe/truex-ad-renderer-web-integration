@@ -18,6 +18,7 @@ Version 1.4.0
     * [`TruexAdRenderer` Input Events](#truexadrenderer-input-events)
         * [`init`](#init)
         * [`start`](#start)
+        * [`stop`](#stop)
     * [`TruexAdRenderer` Output Events -- Main Flow](#truexadrenderer-output-events----main-flow)
         * [`adFetchCompleted`](#adfetchcompleted)
         * [`adStarted`](#adstarted)
@@ -103,6 +104,17 @@ Alternatively, you can instantiate and `init` the `TruexAdRenderer` in preparati
 
 ### Handling Events from TruexAdRenderer
 
+```javascript
+truexAdRenderer = new TruexAdRenderer(vastConfigUrl);
+truexAdRenderer.subscribe(handleAdEvent);
+
+function handleAdEvent(event) {
+    switch (event.type) {
+        ...
+    }
+}
+```
+
 Once `start` has been called on the renderer, it will start to emit events (see [`TruexAdRenderer` Output Events -- Main Flow](#truexadrenderer-output-events----main-flow) and [`TruexAdRenderer` Output Events -- Informative](#truexadrenderer-output-events----informative)).
 
 One of the first events you will receive is `adStarted`. This notifies the host app that the renderer has received an ad for the user and has started to show the unit to the user. The app does not need to do anything in response, however it can use this event to facilitate a timeout. If an `adStarted` event has not fired within a certain amount of time, the host app can proceed to normal video ads.
@@ -179,7 +191,7 @@ The parameters for this method call are:
 
 ```javascript
 /**
- * Queries for the vast config result.
+ * Queries for the vast config result
  *
  * @returns {Promise}
  */
@@ -202,8 +214,8 @@ You may initialize `TruexAdRenderer` early (a few seconds before the next pod ev
  *      Defaults to document.documentElement.
  *
  * @return {Promise} promise that completes when the choice card loads, resolves to the div holding the ad overlay.
-  */
-function start (vastConfig, parentElement)
+ */
+function start(vastConfig, parentElement)
 ```
 
 This event should be triggered by the host app code when the app is ready to display the true[X] unit to the user. This can be called anytime after the unit is initialized.
@@ -213,6 +225,24 @@ The app should have as much extraneous UI hidden as possible, including player c
 After calling `start`, the host app code should wait for a [terminal event](#terminal-events) before taking any more action, while keeping track of whether or not the [`adFreePod`](#adfreepod) event has fired.
 
 In a non-error flow, the renderer will first wait for the ad request triggered in `init` to finish if it has not already. It will then display the true[X] unit to the user in a new component (added to the `TruexAdRenderer` parent component) and then fire the [`adStarted`](#adstarted) event. `adFreePod` and other events may fire after this point, depending on the user's choices, followed by one of the [terminal events](#terminal-events).
+
+#### `stop`
+
+```javascript
+/**
+ * Clean up step to halt all operations in the ad renderer
+ *
+ */
+function stop()
+```
+
+The `stop` method is only called when the app needs the renderer to immediately stop and destroy all related resources. Examples include:
+
+- the user backs out of the video stream to return to the normal app UI
+- there was an unrelated error that requires immediate halt of the current ad unit
+- the app code has reached a custom timeout waiting for either the [`adFetchCompleted`](#adfetchcompleted) or [`adStarted`](#adstarted) events
+
+The `TruexAdRenderer` instance should not be used again after calling `stop` -- please remove all references to it afterwards.
 
 ### `TruexAdRenderer` Output Events -- Main Flow
 
