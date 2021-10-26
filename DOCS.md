@@ -94,7 +94,7 @@ This messaging will be displayed to the user for several seconds, after which th
 
 ### When to show true\[X\]
 
-Upon receiving an ad schedule from your SSAI service, you should be able to detect whether or not true[X] is returned in any of the pods. In a typical [VAST-based](https://www.iab.com/guidelines/vast) ad integration (for example Google Ad Manager of FreeWheel), the `<AdSystem>` within the ad's VAST tag should be `trueX`.
+Upon receiving an ad schedule from your SSAI service, you should be able to detect whether or not true[X] is returned in any of the pods. In a typical [VAST-based](https://www.iab.com/guidelines/vast) ad integration (for example Google Ad Manager or FreeWheel), the `<AdSystem>` within the ad's VAST tag should be `trueX`.
 
 A standard VAST ad response from true[X] contains a `vast_config_url` to pass to our renderer within a JSON blob in the `<AdParameters>` field and a placeholder video in the `<MediaFile>` field. Work with your true[X] contact if you have questions about interpreting our ad payloads.
 
