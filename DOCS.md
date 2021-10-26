@@ -26,22 +26,22 @@ Version 1.4.0
         * [`adError`](#aderror)
         * [`noAdsAvailable`](#noadsavailable)
         * [`adFreePod`](#adfreepod)
-        * [`userCancelStream`](#usercancelstream) 
+        * [`userCancelStream`](#usercancelstream)
     * [`TruexAdRenderer` Output Events -- Informative](#truexadrenderer-output-events----informative)
         * [`optIn`](#optin)
-        * [`optOut`](#optout) 
-        * [`skipCardShown`](#skipcardshown) 
-        * [`userCancel`](#usercancel) 
+        * [`optOut`](#optout)
+        * [`skipCardShown`](#skipcardshown)
+        * [`userCancel`](#usercancel)
 
 ## Overview
 
-In order to support interactive ads on HTML5-enabled smart TVs and game consoles, true[X] has created a Node library that can renderer true[X] ads and leverage your app's existing ad server and content delivery mechanism (e.g. SSAI).
+In order to support interactive ads on HTML5-enabled smart TVs and game consoles, true[X] has created an npm package that can renderer true[X] ads and leverage your app's existing ad server and content delivery mechanism (e.g. SSAI).
 
 With this library, the host player app can defer to the `TruexAdRenderer` when it is required to display a true[X] ad.
 
 For simplicity, publisher implemented code will be referred to as "host app code" while true[X] implemented code will be referred to as "renderer code".
 
-true[X] will provide a Node `@truex/ctv-ad-renderer` library that can be added to your host app. This library will offer a class, `TruexAdRenderer`, that will need to be instantiated, initialized, and given certain commands (described below in [TruexAdRenderer Input Events](#truexadrenderer-input-events)) by the host app code.
+true[X] will provide an npm package: `@truex/ctv-ad-renderer` that can be added to your host app. This library will offer a class, `TruexAdRenderer`, that will need to be instantiated, initialized, and given certain commands (described below in [TruexAdRenderer Input Events](#truexadrenderer-input-events)) by the host app code.
 
 At this point, the renderer code will take on the responsibility of requesting ads from true[X] server, creating the native UI for the true[X] choice card and interactive ad unit, as well as communicating events to the host app code when action is required.
 
@@ -94,7 +94,7 @@ This messaging will be displayed to the user for several seconds, after which th
 
 ### When to show true\[X\]
 
-Upon receiving an ad schedule from your SSAI service, you should be able to detect whether or not true[X] is returned in any of the pods. true[X] ads should have `apiFramework` set to `VPAID` or `truex`.
+Upon receiving an ad schedule from your SSAI service, you should be able to detect whether or not true[X] is returned in any of the pods.
 
 SSAI or ad server vendors differ in the way they convey information back about ad schedules to clients. Certain vendors such as Verizon / Uplynk expose API’s which return details about the ad schedule in a JSON object. For other vendors, for instance Google DAI, the true[X] payload will be encapsulated as part of a companion payload on the returned VAST ad. Please work with your true[X] point of contact if you have difficulty identifying the right approach to detecting the true[X] placeholder, which will be the trigger point for the ad experience.
 
@@ -142,13 +142,13 @@ This is an outline of `TruexAdRenderer` input and output events. Input events ar
 
 ### Installing true[X] Library
 
-The true[X] interactive ad component and its rendering logic are distributed as part of a Node library. It is required for the hosting app to include the renderer library in order for it to be used, this can be achieved by running this `npm` command:
+The true[X] interactive ad component and its rendering logic are distributed as part of an npm package. It is required for the hosting app to include the renderer library in order for it to be used, this can be achieved by running this `npm` command:
 
 ```sh
 npm add @truex/ctv-ad-renderer
 ```
 
-### TruexAdRenderer Constructor 
+### TruexAdRenderer Constructor
 
 ```javascript
 new TruexAdRenderer(parameters, [options]);
