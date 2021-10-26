@@ -105,8 +105,8 @@ Alternatively, you can instantiate and `init` the `TruexAdRenderer` in preparati
 ### Handling Events from TruexAdRenderer
 
 ```javascript
-truexAdRenderer = new TruexAdRenderer(vastConfigUrl);
-truexAdRenderer.subscribe(handleAdEvent);
+tar = new TruexAdRenderer(vastConfigUrl);
+tar.subscribe(handleAdEvent);
 
 function handleAdEvent(event) {
     switch (event.type) {
