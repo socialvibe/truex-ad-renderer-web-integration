@@ -39,17 +39,13 @@ videoController.pause();
 
 let adOverlay;
 let adFreePod = false;
-tar = new TruexAdRenderer(vastConfigUrl);
+
+const tar = new TruexAdRenderer(vastConfigUrl);
 tar.subscribe(handleAdEvent);
 
-return tar.init()
-  .then(vastConfig => {
-    return tar.start(vastConfig);
-  })
-  .then(newAdOverlay => {
-    adOverlay = newAdOverlay;
-  })
-  .catch(handleAdError);
+return tar.init().then(vastConfig => {
+  return tar.start(vastConfig);
+});
 ...
 
 function handleAdEvent(event) {
@@ -60,7 +56,7 @@ function handleAdEvent(event) {
       break;
 
     case adEvents.adError:
-      console.error('ad error: ' + errOrMsg);
+      console.error('ad error: ' + event.errorMessage);
       resumePlayback();
       break;
       
@@ -68,7 +64,6 @@ function handleAdEvent(event) {
     case adEvents.adCompleted:
       // Ad is not available, or has completed. Depending on the adFreePod flag, either the main
       // video or the ad fallback videos are resumed.
-      closeAdOverlay();
       resumePlayback();
       break;
   }
