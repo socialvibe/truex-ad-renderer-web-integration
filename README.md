@@ -37,7 +37,6 @@ import { TruexAdRenderer } from '@truex/ad-renderer';
 
 videoController.pause();
 
-let adOverlay;
 let adFreePod = false;
 
 const tar = new TruexAdRenderer(vastConfigUrl);
@@ -81,5 +80,3 @@ function resumePlayback() {
     }
 }
 ```
-
-## 
