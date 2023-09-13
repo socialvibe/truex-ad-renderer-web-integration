@@ -27,8 +27,8 @@ npm add @truex/ad-renderer
 ### Code Sample
 
 The following code provdes an example of the style of how to integration to TAR, once the video has detected a Truex ad.
-I.e. how to do the `init` and `start` calls to get the ad displayed, as well as the key ad events a client publisher 
-needs to respond to, ultimately to control how to resume the main video.
+For example, how to do the `init` and `start` calls to get the ad displayed, as well as listening for the key ad events
+a client publisher needs to respond to, ultimately to control how to resume the main video.
 
 ```javascript
 import { TruexAdRenderer } from '@truex/ad-renderer';
@@ -43,9 +43,9 @@ let adFreePod = false;
 const tar = new TruexAdRenderer(vastConfigUrl);
 tar.subscribe(handleAdEvent);
 
-return tar.init().then(vastConfig => {
-  return tar.start(vastConfig);
-});
+const vastConfig = await tar.init();
+let adOverlay = await tar.start(vastConfig);
+
 ...
 
 function handleAdEvent(event) {
