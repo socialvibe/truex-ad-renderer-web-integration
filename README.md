@@ -13,12 +13,21 @@ project file, one adds the true[X] dependency as follows:
 ```sh
 npm add @truex/ad-renderer
 ```
+this will add an entry in the `"dependencies"` section in the `package.json` file, something like:
+```json
+    "dependencies": {
+        "@truex/ad-renderer": "1.11.0",
+```
+One then builds and runs their web app like usual, e.g. invoking `npm start` for webpack-based projects.
 
 ### Code Sample
 
-The following code provdes an example of the style of how to integration to TAR, once the video has detected a Truex ad.
-For example, how to do the `init` and `start` calls to get the ad displayed, as well as listening for the key ad events
-a client publisher needs to respond to, ultimately to control how to resume the main video.
+To actually integrate the true[X] ad renderer, one has to create and invoke it during your app's video playback 
+when the time of an ad break is reached.
+
+The following code provides an example of the style of how to integration to TAR, once a Truex ad has been detected 
+during playback. For example, we can see how to call the `init` and `start` methods to get the ad displayed, and to
+listen for the key ad events a client publisher needs to respond to, ultimately to control how to resume the main video.
 
 ```javascript
 import { TruexAdRenderer } from '@truex/ad-renderer';
@@ -73,7 +82,7 @@ function resumePlayback() {
 
 ## Next Steps
 
-[TruexAdRenderer-Web Documentation](DOCS.md) outlines use of the ad renderer, including its API interface and the observable events it fires
+[TruexAdRenderer-Web Documentation](DOCS.md) outlines use of the ad renderer, including its API interface and the observable events it fires.
 
 ### Reference Apps
 
