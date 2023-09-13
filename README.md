@@ -1,13 +1,17 @@
 # true[X]  Web Integrations
-Documentation and reference apps for integrating true[X]'s CTV web ad renderer
 
+This document describes the how to use Infillion's true[X] web ad renderer, a library that allows the presentation of
+interactive ads, intended for use in "Full Experience Playback" (FEP) scenarios such as video web sites or applications.
+
+The library provides a class called the `TruexAdRenderer` (TAR). TAR is supports running within any web content, 
+specifically for desktop and mobile web content, as well as for the "Connected TV" (CTV) platforms, such as Smart TVs
+and game consoles, i.e. for the so-called "10 foot" experience.
 
 ## Setup
-This document describes the initial steps needed to make use of the `TruexAdRenderer` in an HTML5 web application intended for Smart TVs and game consoles, i.e. for the so-called "10 foot" experience.
-
-The true[X] ad renderer is available as an `npm` module. For the typical web app based around a `package.json` project file, one adds the true[X] dependency as follows:
+The true[X] ad renderer is available as an `npm` module. For the typical web app based development around a `package.json` 
+project file, one adds the true[X] dependency as follows:
 ```sh
-npm add @truex/ctv-ad-renderer
+npm add @truex/ad-renderer
 ```
 
 ## Next Steps
@@ -22,14 +26,20 @@ npm add @truex/ctv-ad-renderer
 
 ### Code Sample
 
+The following code provdes an example of the style of how to integration to TAR, once the video has detected a Truex ad.
+I.e. how to do the `init` and `start` calls to get the ad displayed, as well as the key ad events a client publisher 
+needs to respond to, ultimately to control how to resume the main video.
+
 ```javascript
-import { TruexAdRenderer } from '@truex/ctv-ad-renderer';
+import { TruexAdRenderer } from '@truex/ad-renderer';
 
 ...
 
 videoController.pause();
 
-tar = new TruexAdRenderer(vastConfigUrl, {supportsUserCancelStream: true});
+let adOverlay;
+let adFreePod = false;
+tar = new TruexAdRenderer(vastConfigUrl);
 tar.subscribe(handleAdEvent);
 
 return tar.init()
@@ -40,43 +50,20 @@ return tar.init()
     adOverlay = newAdOverlay;
   })
   .catch(handleAdError);
-
 ...
 
 function handleAdEvent(event) {
   const adEvents = tar.adEvents;
   switch (event.type) {
-    case adEvents.adError:
-      handleAdError(event.errorMessage);
-      break;
-
-    case adEvents.adStarted:
-      // Choice card loaded and displayed.
-      videoController.showLoadingSpinner(false);
-      break;
-
-    case adEvents.optIn:
-      // User started the engagement experience
-      break;
-
-    case adEvents.optOut:
-      // User cancelled out of the choice card, either explicitly, or implicitly via a timeout.
-      break;
-
     case adEvents.adFreePod:
       adFreePod = true; // the user did sufficient interaction for an ad credit
       break;
 
-    case adEvents.userCancel:
-      // User backed out of the ad, now showing the choice card again.
+    case adEvents.adError:
+      console.error('ad error: ' + errOrMsg);
+      resumePlayback();
       break;
-
-    case adEvents.userCancelStream:
-      // User backed out of the choice card, which means backing out of the entire video.
-      closeAdOverlay();
-      videoController.closeVideoAction();
-      break;
-
+      
     case adEvents.noAdsAvailable:
     case adEvents.adCompleted:
       // Ad is not available, or has completed. Depending on the adFreePod flag, either the main
@@ -87,14 +74,16 @@ function handleAdEvent(event) {
   }
 }
 
-function handleAdError(errOrMsg) {
-  console.error('ad error: ' + errOrMsg);
-  if (tar) {
-    // Ensure the ad is no longer blocking back or key events, etc.
-    tar.stop();
-  }
-  closeAdOverlay();
-  resumePlayback();
+function resumePlayback() {
+    if (adFreePod) {
+        // The user has the credit, resume the main video after the ad break.
+        videoController.skipAdBreak();
+        videoController.resumeMainVideo();
+    } else {
+        // Continue with playing the remaining fallback ad videos in the ad break.
+        videoController.skipCurrentAd();
+        videoController.resumeAdBreak();
+    }
 }
 ```
 
