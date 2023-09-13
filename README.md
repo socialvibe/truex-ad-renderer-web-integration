@@ -14,16 +14,6 @@ project file, one adds the true[X] dependency as follows:
 npm add @truex/ad-renderer
 ```
 
-## Next Steps
-
-[TruexAdRenderer-Web Documentation](DOCS.md) outlines use of the ad renderer, including its API interface and the observable events it fires
-
-### Reference Apps
-
-1. [Generic Reference App](https://github.com/socialvibe/truex-ctv-web-reference-app)
-1. [Google Ad Manager: Server-side Ad Insertion Reference App](https://github.com/socialvibe/truex-ctv-web-google-ad-manager-reference-app)
-1. [Google Ad Manager: Client-side Ad Insertion Reference App](https://github.com/socialvibe/truex-ctv-google-ima-csai-ref-app)
-
 ### Code Sample
 
 The following code provdes an example of the style of how to integration to TAR, once the video has detected a Truex ad.
@@ -80,3 +70,13 @@ function resumePlayback() {
     }
 }
 ```
+
+## Next Steps
+
+[TruexAdRenderer-Web Documentation](DOCS.md) outlines use of the ad renderer, including its API interface and the observable events it fires
+
+### Reference Apps
+
+1. [Generic Reference App](https://github.com/socialvibe/truex-ctv-web-reference-app)
+1. [Google Ad Manager: Server-side Ad Insertion Reference App](https://github.com/socialvibe/truex-ctv-web-google-ad-manager-reference-app)
+1. [Google Ad Manager: Client-side Ad Insertion Reference App](https://github.com/socialvibe/truex-ctv-google-ima-csai-ref-app)
