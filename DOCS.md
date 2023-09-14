@@ -347,7 +347,9 @@ function start(vastConfig, parentElement)
 This should be called by the host app code when the app is ready to display the TrueX unit to the user. 
 This can be called anytime after the renderer is initialized.
 
-The host app should have as much extraneous UI hidden as possible, including player controls, status bars and soft buttons/keyboards.
+The host app should have as much extraneous UI hidden as possible, including player controls, status bars and soft buttons/keyboards. 
+On constrained devices, especially connected TV devices, it is preferrable to also unload the main video if possible, 
+resuming it after the ad unit is completed.
 
 After calling `start`, the host app code should wait for a [terminal event](#terminal-events) before taking further 
 actions, while keeping track of whether the [`adFreePod`](#adfreepod) event has fired.
