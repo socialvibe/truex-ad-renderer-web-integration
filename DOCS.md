@@ -12,7 +12,6 @@
     * [When to show true\[X\]](#when-to-show-truex)
     * [Code Sample](#code-sample)
     * [Handling Ad Events](#handling-ad-events)
-        * [Terminal Events](#terminal-events)
     * [Handling Ad Elimination](#handling-ad-elimination)
 * [TruexAdRenderer Web API](#truexadrenderer-api)
     * [`TruexAdRenderer` Methods](#truexadrenderer-methods)
@@ -223,8 +222,6 @@ stream.
 The `adFreePod` event signifies that the user has earned a credit with TrueX and all linear video ads remaining in the 
 current ad break should be skipped. If the `adFreePod` event did not fire before a terminal event is emitted, 
 the app should resume playback without skipping any ads, so the user receives a normal video ad payload.
-
-#### Terminal Events
 
 The *terminal events* are:
 * `adCompleted`: the user has exited the TrueX ad
