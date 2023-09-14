@@ -18,15 +18,15 @@ this will add an entry in the `"dependencies"` section in the `package.json` fil
     "dependencies": {
         "@truex/ad-renderer": "1.11.0",
 ```
-One then builds and runs their web app like usual, e.g. invoking `npm start` for webpack-based projects.
+You then build and run your web app like usual, e.g. invoking `npm start` for webpack-based projects.
 
 ### Code Sample
 
-To actually integrate the TrueX ad renderer, one has to create and invoke it during your app's video playback 
+To actually integrate the TrueX ad renderer, you have to create and invoke it during your app's video playback 
 when the time of an ad break is reached.
 
 The following code provides an example of the style of how to integration to TAR, once a Truex ad has been detected 
-during playback. For example, we can see how to call the `init` and `start` methods to get the ad displayed, and to
+during playback. For example, you can see how to call the `init` and `start` methods to get the ad displayed, and to
 listen for the key ad events a client publisher needs to respond to, ultimately to control how to resume the main video.
 
 ```javascript

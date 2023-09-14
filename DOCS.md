@@ -76,6 +76,7 @@ There are two distinct product flows supported by `TruexAdRenderer`: Sponsored S
 
 In a Sponsored Ad Break flow, once the user hits a mid-roll break with a TrueX tag flighted, they will be shown a "choice-card" offering them the choice between watching a normal set of video ads or a fully interactive TrueX ad:
 
+
 ![choice card](media/choice_card.png)
 
 _**Fig. A** example TrueX mid-roll choice card_
@@ -114,7 +115,7 @@ This messaging will be displayed to the user for several seconds, after which th
 
 ### Setup
 The TrueX ad renderer is available as an `npm` module via the `@truex/ad-renderer` package. For the typical web based development around a `package.json`
-project file, one adds the TrueX dependency as follows:
+project file, you add the TrueX dependency as follows:
 ```sh
 npm add @truex/ad-renderer
 ```
@@ -123,7 +124,7 @@ this will add an entry in the `"dependencies"` section in the `package.json` fil
     "dependencies": {
         "@truex/ad-renderer": "1.11.0",
 ```
-One then builds and runs their web app like usual, e.g. invoking `npm start` for webpack-based projects.
+You then build and run their web app like usual, e.g. invoking `npm start` for webpack-based projects.
 
 ### When to show a TrueX Ad
 
@@ -152,7 +153,7 @@ Alternatively, you can call `init` on the `TruexAdRenderer` in preparation for a
 ### Code Sample
 
 The following code provides an example of the style of how to integration to TAR, once a Truex ad has been detected
-during playback. For example, we can see how to call the `init` and `start` methods to get the ad displayed, and to
+during playback. For example, you can see how to call the `init` and `start` methods to get the ad displayed, and to
 listen for the key ad events a client publisher needs to respond to, ultimately to control how to resume the main video.
 
 ```javascript
