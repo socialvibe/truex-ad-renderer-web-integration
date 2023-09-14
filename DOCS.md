@@ -13,7 +13,7 @@
     * [Code Sample](#code-sample)
     * [Handling Ad Events](#handling-ad-events)
     * [Handling Ad Elimination](#handling-ad-elimination)
-* [TruexAdRenderer Web API](#truexadrenderer-api)
+* [TruexAdRenderer API](#truexadrenderer-api)
     * [`TruexAdRenderer` Methods](#truexadrenderer-methods)
         * [`constructor`](#constructor)
         * [`init`](#init)
@@ -306,6 +306,8 @@ If one uses `TruexAdRenderer`, that maps to `TruexAdRendererCTV`
  */
 constructor(parameters, options)
 ```
+
+The usual case is to construct the renderer with the vast config url, e.g. `const tar = new TruexAdRendererCTV(vastConfigUrl)`.
 
 #### `init`
 
