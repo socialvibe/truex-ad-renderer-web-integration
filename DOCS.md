@@ -5,6 +5,7 @@
 ## Contents
 
 * [Overview](#overview)
+  * [Supported Platforms](#supported-platforms)
 * [Product Flows](#product-flows)
 * [How to use TruexAdRenderer](#how-to-use-truexadrenderer)
     * [Setup](#setup)
@@ -54,6 +55,19 @@ At this point, the renderer code will take on the responsibility of requesting a
 The host app code will still need to parse out the ad response, detect when a TrueX ad is supposed to display, pause the stream, instantiate `TruexAdRenderer`, and handle any events emitted by the renderer code.
 
 It will also need to handle skipping ads in the current ad pod, if it is notified to do so.
+
+### Supported Platforms
+
+The TruexAdRender runs on any modern web browser, so mobile and desktop platforms are naturally supported.
+
+For connected tv platforms such as smart TVs and gaming consoles, the following platforms are supported:
+* Comcast X1 / Flex
+* Fire TV / Android TV
+* Vizio Smartcast
+* LG WebOS
+* Samsung Tizen
+* PS4, PS5
+* XboxOne
 
 ## Product Flows
 
