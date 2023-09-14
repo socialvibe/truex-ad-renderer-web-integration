@@ -8,7 +8,7 @@ specifically for desktop and mobile web content, as well as for the "Connected T
 and game consoles, i.e. for the so-called "10 foot" experience.
 
 ## Setup
-The true[X] ad renderer is available as an `npm` module. For the typical web app based development around a `package.json` 
+The true[X] ad renderer is available as an `npm` module. For the typical web based development around a `package.json` 
 project file, one adds the true[X] dependency as follows:
 ```sh
 npm add @truex/ad-renderer
@@ -38,7 +38,7 @@ videoController.pause();
 
 let adFreePod = false;
 
-const tar = new TruexAdRenderer(vastConfigUrl);
+const tar = new TruexAdRendererCTV(vastConfigUrl); // or TruexAdRendererDesktop or TruexAdRendererMobile, as appropriate
 tar.subscribe(handleAdEvent);
 
 const vastConfig = await tar.init();
@@ -86,6 +86,11 @@ function resumePlayback() {
 
 ### Reference Apps
 
+Here is a [reference application example](https://github.com/socialvibe/truex-ctv-web-reference-app) that uses the `TruexAdRenderer`, demonstrating its use from a main video, as well as including several platform launcher projects that demonstrate how to sideload the reference application to various devices.
+
 1. [Generic Reference App](https://github.com/socialvibe/truex-ctv-web-reference-app)
+   * Presents a "Generic" CSAI style web app that uses the `TruexAdRenderer`, demonstrating its use from a main video, 
+     as well as including several platform launcher projects that demonstrate how to sideload the reference application to various devices.
 1. [Google Ad Manager: Server-side Ad Insertion Reference App](https://github.com/socialvibe/truex-ctv-web-google-ad-manager-reference-app)
+   * Presents a 
 1. [Google Ad Manager: Client-side Ad Insertion Reference App](https://github.com/socialvibe/truex-ctv-google-ima-csai-ref-app)
