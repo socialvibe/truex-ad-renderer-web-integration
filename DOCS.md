@@ -1,7 +1,7 @@
 [//]: # (Not sure if I should show the Infillion one instead, or I could just hide it entirely.)
 [//]: # (![TrueX logo]&#40;media/truex.png&#41;)
 
-# TruexAdRenderer Web Documentation
+# TruexAdRenderer Web Integration
 
 ## Contents
 
