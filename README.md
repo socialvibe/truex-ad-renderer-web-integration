@@ -1,6 +1,6 @@
-# true[X]  Web Integrations
+# TruexAdRenderer Web Integration: Quick Guide
 
-This document describes the how to use Infillion's true[X] web ad renderer, a library that allows the presentation of
+This document describes the how to use Infillion's TrueX web ad renderer, a library that allows the presentation of
 interactive ads, intended for use in "Full Experience Playback" (FEP) scenarios such as video web sites or applications.
 
 The library provides a class called the `TruexAdRenderer` (TAR). TAR is supports running within any web content, 
@@ -8,8 +8,8 @@ specifically for desktop and mobile web content, as well as for the "Connected T
 and game consoles, i.e. for the so-called "10 foot" experience.
 
 ## Setup
-The true[X] ad renderer is available as an `npm` module. For the typical web based development around a `package.json` 
-project file, one adds the true[X] dependency as follows:
+The TrueX ad renderer is available as an `npm` module. For the typical web based development around a `package.json` 
+project file, one adds the TrueX dependency as follows:
 ```sh
 npm add @truex/ad-renderer
 ```
@@ -22,7 +22,7 @@ One then builds and runs their web app like usual, e.g. invoking `npm start` for
 
 ### Code Sample
 
-To actually integrate the true[X] ad renderer, one has to create and invoke it during your app's video playback 
+To actually integrate the TrueX ad renderer, one has to create and invoke it during your app's video playback 
 when the time of an ad break is reached.
 
 The following code provides an example of the style of how to integration to TAR, once a Truex ad has been detected 
