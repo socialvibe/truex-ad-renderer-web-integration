@@ -3,13 +3,13 @@
 This document describes the how to use Infillion's TrueX web ad renderer, a library that allows the presentation of
 interactive ads, intended for use in "Full Experience Playback" (FEP) scenarios such as video web sites or applications.
 
-The library provides a class called the `TruexAdRenderer` (TAR). TAR is supports running within any web content, 
+The library provides a class called the `TruexAdRenderer` (TAR). TAR supports running within any web content, 
 specifically for desktop and mobile web content, as well as for the "Connected TV" (CTV) platforms, such as Smart TVs
 and game consoles, i.e. for the so-called "10 foot" experience.
 
 ## Setup
 The TrueX ad renderer is available as an `npm` module. For the typical web based development around a `package.json` 
-project file, one adds the TrueX dependency as follows:
+project file, you add the TrueX dependency as follows:
 ```sh
 npm add @truex/ad-renderer
 ```
@@ -20,13 +20,18 @@ this will add an entry in the `"dependencies"` section in the `package.json` fil
 ```
 You then build and run your web app like usual, e.g. invoking `npm start` for webpack-based projects.
 
+Alternatively, if you prefer you can prefer to the TAR library directly in a script tag, e.g.
+```html
+<script src="https://cdn.jsdelivr.net/npm/@truex/ad-renderer@1.11.0"></script>
+```
+or if you want to always refer to the latest version:
+```html
+<script src="https://cdn.jsdelivr.net/npm/@truex/ad-renderer@latest"></script>
+```
+
 ### Code Sample
 
-To actually integrate the TrueX ad renderer, you have to create and invoke it during your app's video playback 
-when the time of an ad break is reached.
-
-The following code provides an example of the style of how to integration to TAR, once a Truex ad has been detected 
-during playback. For example, you can see how to call the `init` and `start` methods to get the ad displayed, and to
+Once a TrueX ad is detected, the renderer needs to be created and displayed. The following code provides an example of the typical approach of integrating to TAR. For example, it shows how you can call the `init` and `start` methods to get the ad displayed, and to
 listen for the key ad events a client publisher needs to respond to, ultimately to control how to resume the main video.
 
 ```javascript
