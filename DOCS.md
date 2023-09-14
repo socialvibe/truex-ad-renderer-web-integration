@@ -42,7 +42,7 @@
 ## Overview
 
 In order to support interactive ads on on mobile and desktop web sites, as well as web-enabled smart TVs and game consoles, 
-Infillion has created the npm package `@truex/ad-renderer` to add to host web sies and web apps that can renderer TrueX interactive ads and leverage your app's existing ad server and content 
+Infillion has created the npm package `@truex/ad-renderer` to add to host web sites and web apps that can renderer TrueX interactive ads and leverage your app's existing ad server and content 
 delivery mechanism (e.g. SSAI).
 
 For simplicity, publisher implemented code will be referred to as "host app code" while TrueX implemented code will be referred to as "renderer code" or TAR.
@@ -136,13 +136,65 @@ Alternatively, you can call `init` on the `TruexAdRenderer` in preparation for a
 
 ### Code Sample
 
-TBD
+The following code provides an example of the style of how to integration to TAR, once a Truex ad has been detected
+during playback. For example, we can see how to call the `init` and `start` methods to get the ad displayed, and to
+listen for the key ad events a client publisher needs to respond to, ultimately to control how to resume the main video.
+
+```javascript
+import { TruexAdRenderer } from '@truex/ad-renderer';
+
+...
+
+videoController.pause();
+
+let adFreePod = false;
+
+const tar = new TruexAdRendererCTV(vastConfigUrl); // or TruexAdRendererDesktop or TruexAdRendererMobile, as appropriate
+tar.subscribe(handleAdEvent);
+
+const vastConfig = await tar.init();
+let adOverlay = await tar.start(vastConfig);
+
+...
+
+function handleAdEvent(event) {
+  const adEvents = tar.adEvents;
+  switch (event.type) {
+    case adEvents.adFreePod:
+      adFreePod = true; // the user did sufficient interaction for an ad credit
+      break;
+
+    case adEvents.adError:
+      console.error('ad error: ' + event.errorMessage);
+      resumePlayback();
+      break;
+      
+    case adEvents.noAdsAvailable:
+    case adEvents.adCompleted:
+      // Ad is not available, or has completed. Depending on the adFreePod flag, either the main
+      // video or the ad fallback videos are resumed.
+      resumePlayback();
+      break;
+  }
+}
+
+function resumePlayback() {
+    if (adFreePod) {
+        // The user has the credit, resume the main video after the ad break.
+        videoController.skipAdBreak();
+        videoController.resumeMainVideo();
+    } else {
+        // Continue with playing the remaining fallback ad videos in the ad break.
+        videoController.skipCurrentAd();
+        videoController.resumeAdBreak();
+    }
+}
+```
 
 ### Handling Ad Events
 
-Once `start` has been called on the renderer, it will start to emit events (see [`TruexAdRenderer` Ad Events](#truexadrenderer-ad-events)).
-These ad events that can be monitored via the [`subscribe`](#subscribe) method. 
-E.g. refer to the `handleAdEvent` method used in the [code sample](#code-sample) above.
+Once the renderer has been initialized and started, it will begin to emit ad events (see [`TruexAdRenderer` Ad Events](#truexadrenderer-ad-events)).
+These ad events that can be monitored via the [`subscribe`](#subscribe) method as shown in the above code sample.
 
 One of the first events you will receive is `adStarted`. This notifies the host app that the renderer has received an 
 ad for the user and has started to show the unit to the user. The app does not need to do anything in response, 
@@ -185,7 +237,7 @@ TruexAdRendererCTV
 TruexAdRendererDesktop
 TruexAdRendererMobile
 ```
-One should use the appropriate one for your platform, so as to allow the correct ad tracking.
+One should use the appropriate one for your platform, so as to allow the correct ad tracking to be used.
 
 If one uses `TruexAdRenderer`, that maps to `TruexAdRendererCTV`
 
