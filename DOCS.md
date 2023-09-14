@@ -19,6 +19,10 @@
         * [`init`](#init)
         * [`start`](#start)
         * [`stop`](#stop)
+        * [`pause`](#pause)
+        * [`resume`](#resume)
+        * [`subscribe`](#subscribe)
+        * [`unsubscribe`](#unsubscribe)
     * [`TruexAdRenderer` Ad Events](#truexadrenderer-ad-events)
         * [`adFetchCompleted`](#adfetchcompleted)
         * [`adStarted`](#adstarted)
@@ -289,8 +293,9 @@ depending on the user's choices, followed by one of the [terminal events](#termi
 
 ```javascript
 /**
- * Clean up step to halt all operations in the ad renderer
- *
+ * Allow ads to be forcibly closed by the host app or test script.
+ * (Needs to be possible if the app needs to reset, otherwise back actions can be permanently
+ * blocked if the ad is not cleaned up.)
  */
 function stop()
 ```
@@ -303,6 +308,68 @@ Examples include:
 - the app code has reached a custom timeout waiting for either the [`adFetchCompleted`](#adfetchcompleted) or [`adStarted`](#adstarted) events
 
 The renderer instance should not be used again after calling `stop` -- please remove all references to it afterwards.
+
+#### `pause`
+
+```javascript
+/**
+ * Pauses an ad if the hosting app needs to suspend/resume itself.
+ * I.e. Any ad videos are paused and countdowns suspended.
+ */
+function pause()
+```
+
+#### `resume`
+
+```javascript
+/**
+ * Resumes a previously paused ad. I.e. any paused ad videos are resumed, as well as suspended countdowns.
+ */
+function resume()
+```
+
+#### `subscribe`
+
+```javascript
+/**
+ * Adds a callback subscription to receive ad events.
+ *
+ * An ad event object as a type field to describe which event has occurred (i.e. one of
+ * the {@link adEvents} constants), along with other optional data fields depending on the event.
+ *
+ * @param type Indicates the type of event to subscribe to. If empty or if a single callback function,
+ *   then the function is invoked on all ad events.
+ * @param callback Describes the callback when the first arg is the type string.
+ */
+function subscribe(type, callback)
+```
+
+Use `subscribe` to listen to ad events emitted from the renderer. The key ones the host app should listen to are:
+```javascript
+adFreePod
+adCompleted
+noAdsAvailable
+adError
+```
+
+To listen to all ad events, just pass in a single callback as the argument, e.g. `tar.subscribe(handleAdEvent)`.
+
+To listen to a particular ad event, pass in the type to listen to and the callback, e.g. `tar.subscribe('adCompleted', handleAdCompleted)`
+
+The ad event names are available as constants via the renderer's `adEvents` field, e.g. `tar.adEvents.adFreePod`
+
+#### `unsubscribe`
+
+```javascript
+/**
+ * Removes the callback subscription.
+ *
+ * @param type Indicates the type of event to unsubscribe from. If empty or if a single callback function,
+ *   then the callback is unsubscribed subscribed for all ad events.
+ * @param callback Describes the callback when the first arg is the type string.
+ */
+function unsubscribe(type, callback)
+```
 
 ### `TruexAdRenderer` Ad Events
 
@@ -400,7 +467,7 @@ This event will fire if the user opts for a normal video ad experience.
 The event data field for this event is:
 
 * `userInitiated`: This will be set to `true` if this was actively selected by the user, `false` if the user simply 
-* allowed the choice card countdown to expire.
+allowed the choice card countdown to expire.
 
 #### `skipCardShown`
 
