@@ -49,7 +49,9 @@ delivery mechanism (e.g. SSAI).
 
 For simplicity, publisher implemented code will be referred to as "host app code" while TrueX implemented code will be referred to as "renderer code" or TAR.
 
-This library provides a class, `TruexAdRenderer`, that will need to be instantiated, initialized, and displayed by the host app code, as described below in [TruexAdRenderer API](#truexadrenderer-api).
+The intended audience for this document is the host application developer who has to integrate to the TrueX renderer.
+
+The npm library provides a class, `TruexAdRenderer`, that will need to be instantiated, initialized, and displayed by the host app code, as described below in [TruexAdRenderer API](#truexadrenderer-api).
 
 At this point, the renderer code will take on the responsibility of requesting ads from TrueX server, creating the native UI for the TrueX choice card and interactive ad unit, as well as communicating events to the host app code when action is required.
 
