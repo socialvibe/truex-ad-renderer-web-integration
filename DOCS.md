@@ -63,7 +63,7 @@ It will also need to handle skipping ads in the current ad pod, if it is notifie
 
 The TruexAdRender runs on any modern web browser, so mobile and desktop platforms are naturally supported.
 
-For connected tv platforms such as smart TVs and gaming consoles, the following platforms are currently supported:
+For connected TV platforms such as smart TVs and gaming consoles, the following platforms are currently supported:
 * Comcast X1 / Flex
 * Fire TV / Android TV
 * Vizio Smartcast
