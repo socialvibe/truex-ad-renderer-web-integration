@@ -9,7 +9,7 @@
 * [Product Flows](#product-flows)
 * [How to use TruexAdRenderer](#how-to-use-truexadrenderer)
     * [Setup](#setup)
-    * [When to show true\[X\]](#when-to-show-truex)
+    * [When to Show a TrueX Ad](#when-to-show-a-truex-ad)
     * [Code Sample](#code-sample)
     * [Handling Ad Events](#handling-ad-events)
       * [Terminal Events](#terminal-events)
@@ -124,7 +124,7 @@ this will add an entry in the `"dependencies"` section in the `package.json` fil
 ```
 One then builds and runs their web app like usual, e.g. invoking `npm start` for webpack-based projects.
 
-### When to show true\[X\]
+### When to show a TrueX Ad
 
 Upon receiving an ad break from your ad provider, you should be able to detect whether or not TrueX is returned in 
 any of the pods. In a typical [VAST-based](https://www.iab.com/guidelines/vast) ad integration 
