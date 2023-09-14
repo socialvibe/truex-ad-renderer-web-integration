@@ -26,6 +26,7 @@
     * [`TruexAdRenderer` Ad Events](#truexadrenderer-ad-events)
         * [`adFetchCompleted`](#adfetchcompleted)
         * [`adStarted`](#adstarted)
+        * [`adDisplayed`](#addisplayed)
         * [`adCompleted`](#adcompleted)
         * [`adError`](#aderror)
         * [`noAdsAvailable`](#noadsavailable)
@@ -35,6 +36,8 @@
         * [`optOut`](#optout)
         * [`skipCardShown`](#skipcardshown)
         * [`userCancel`](#usercancel)
+        * [`popupWebsite`](#popupwebsite)
+        * [`xtendedViewStarted`](#xtendedviewstarted)
 
 ## Overview
 
@@ -396,8 +399,14 @@ resuming playback with normal video ads.
 
 #### `adStarted`
 
-This event will fire in response to the `start` input event when the TrueX UI is ready and has been added to 
-the component hierarchy.
+This event fires after the `start` call, when the TrueX UI is being constructed and connected to the web page.
+
+#### `adDisplayed`
+
+This event fires once the TrueX UI is loaded and visible, i.e. all image assets are loaded, etc.
+
+This is useful if the host app is implementing its own loading indiciator UX (i.e. its own loading spinner), 
+and needs to know when the ad UI is actually ready to be disabled without delays.
 
 #### `adCompleted`
 
@@ -483,3 +492,23 @@ This would be achieved by tapping the "Yes" link to the "Are you sure you want t
 
 Note that after a `userCancel`, the user can opt-in and engage with an interactive ad again, so more `optIn` 
 or `optOut` events may then be fired.
+
+#### `popupWebsite`
+
+On mobile platforms, ad units with links to external web sites fire this event when the user clicks on the 
+web site link, e.g. typically via a "Learn More" link.
+
+On mobile platforms, navigating to an external web site means leaving the current application. As such this ad event 
+is used to communicate the user's intention, and the host app needs to open the external web page as appropriate 
+for the platform. E.g. for Android, an intent is raised to open the web page in the phone's browser.  
+
+The event data field for this event is:
+
+* `url`: Indicates the web page to navigate to.
+
+#### `xtendedViewStarted`
+
+This event fires for TrueX ad creatives that their own fallback extended videos built in. 
+
+From the host app's perspective, nothing more is needed to be done, and the regular ad event flow processing will occur, 
+just with the extended ad content instead.
