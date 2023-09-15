@@ -218,7 +218,7 @@ TruexAdRendererCTV
 TruexAdRendererDesktop
 TruexAdRendererMobile
 ```
-One should use the appropriate one for your platform, so as to allow the correct ad tracking to be used.
+You should use the appropriate one for your platform, so as to allow the correct ad tracking to be used.
 
 If one uses the (now deprecated) `TruexAdRenderer` class, that maps to `TruexAdRendererCTV`
 
