@@ -7,7 +7,6 @@
 
 * [Overview](#overview)
   * [Supported Platforms](#supported-platforms)
-* [Product Flows](#product-flows)
 * [How to use TruexAdRenderer](#how-to-use-truexadrenderer)
     * [Setup](#setup)
     * [When to Show a TrueX Ad](#when-to-show-a-truex-ad)
@@ -71,47 +70,6 @@ For connected TV platforms such as smart TVs, gaming consoles, and set-top boxes
 * Samsung Tizen
 * PS4, PS5
 * XboxOne
-
-## Product Flows
-
-There are two distinct product flows supported by `TruexAdRenderer`: Sponsored Stream (full-stream ad-replacement) and Sponsored Ad Break (mid-roll ad-replacement).
-
-In a Sponsored Ad Break flow, once the user hits a mid-roll break with a TrueX tag flighted, they will be shown a "choice-card" offering them the choice between watching a normal set of video ads or a fully interactive TrueX ad:
-
-
-![choice card](media/choice_card.png)
-
-_**Fig. A** example TrueX mid-roll choice card_
-
-If the user opts for a normal ad break, or if the user does not make a selection before the countdown timer expires, the TrueX UI will close and playback of normal video ads can continue as usual.
-
-If the user opts to interact with TrueX, an interactive ad unit will be shown to the user:
-
-![ad](media/ad.png)
-
-_**Fig. B** example TrueX interactive ad unit_
-
-The requirement for the user to "complete" this ad is for them to spend at least the allotted time on the unit and for at least one interaction (e.g. navigating anywhere through the ad).
-
-![true attention timer example](media/true-attention-timer-example.png)
-
-_**Fig. C** example TrueX attention timer_
-
-Once the user fulfills both requirements, a "Watch Your Show" button will appear in the bottom right, which the user can select to exit the TrueX ad. Having completed a TrueX ad, the user will be returned directly to content, skipping the remaining ads in the current ad pod.
-
-The Sponsored Stream flow is quite similar. In this scenario, a user will be shown a choice-card in the pre-roll:
-
-![choice card](media/choice_card.png)
-
-_**Fig. D** example TrueX pre-roll choice card (full-stream replacement)_
-
-Similarly, if the user opts-in and completes the TrueX ad, they will be skipped over the remainder of the pre-roll ad break. However, every subsequent mid-roll break in the current stream will also be skipped over. In this case instead of the regular pod of video ads, the user will be shown a "hero card" (also known as a "skip card"):
-
-![skip card](media/skip_card.png)
-
-_**Fig. E** example true\[X\] mid-roll skip card_
-
-This messaging will be displayed to the user for several seconds, after which they will be returned directly to content.
 
 ## How to use TruexAdRenderer
 
