@@ -35,7 +35,7 @@ Once a TrueX ad is detected, the renderer needs to be created and displayed. The
 listen for the key ad events a client publisher needs to respond to, ultimately to control how to resume the main video.
 
 ```javascript
-import { TruexAdRenderer } from '@truex/ad-renderer';
+import { TruexAdRendererCTV } from '@truex/ad-renderer';
 
 ...
 
