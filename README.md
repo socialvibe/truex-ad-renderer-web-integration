@@ -1,7 +1,7 @@
 # TruexAdRenderer Web Integration: Quick Guide
 
 This document describes the how to use Infillion's TrueX web ad renderer, a library that allows the presentation of
-interactive ads, intended for use in "Full Experience Playback" (FEP) scenarios such as video web sites or applications.
+interactive ads, intended for use in "Full Episode Player" (FEP) scenarios such as video web sites or applications.
 
 The library provides a class called the `TruexAdRenderer` (TAR). TAR supports running within any web content, 
 specifically for desktop and mobile web content, as well as for the "Connected TV" (CTV) platforms, such as Smart TVs
@@ -29,10 +29,15 @@ or if you want to always refer to the latest version:
 <script src="https://cdn.jsdelivr.net/npm/@truex/ad-renderer@latest"></script>
 ```
 
-### Code Sample
+### Initialization
 
-Once a TrueX ad is detected, the renderer needs to be created and displayed. The following code provides an example of the typical approach of integrating to TAR. For example, it shows how you can call the `init` and `start` methods to get the ad displayed, and to
-listen for the key ad events a client publisher needs to respond to, ultimately to control how to resume the main video.
+Once a TrueX ad is detected, the renderer needs to be created and displayed. The following code snippet provides an
+example of the typical approach of integrating to TAR. For example, it shows how you can call the `init` and `start`
+methods to get the ad displayed, and to listen for the key ad events a client publisher needs to respond to, ultimately
+to control how to resume the main video.
+
+We refer to a `vastConfigUrl` in this snippet, which you should be pull out of the TrueX ad response in the ad schedule
+from your ad server / SSAI provider.
 
 ```javascript
 import { TruexAdRendererCTV } from '@truex/ad-renderer';
@@ -97,5 +102,4 @@ Here is a [reference application example](https://github.com/socialvibe/truex-ct
    * Presents a "Generic" CSAI style web app that uses the `TruexAdRenderer`, demonstrating its use from a main video, 
      as well as including several platform launcher projects that demonstrate how to sideload the reference application to various devices.
 1. [Google Ad Manager: Server-side Ad Insertion Reference App](https://github.com/socialvibe/truex-ctv-web-google-ad-manager-reference-app)
-   * Presents a 
 1. [Google Ad Manager: Client-side Ad Insertion Reference App](https://github.com/socialvibe/truex-ctv-google-ima-csai-ref-app)

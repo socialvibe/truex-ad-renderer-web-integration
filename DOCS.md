@@ -73,21 +73,27 @@ For connected TV platforms such as smart TVs, gaming consoles, and set-top boxes
 ### Setup
 The TrueX ad renderer is available as an `npm` module via the `@truex/ad-renderer` package. For the typical web based development around a `package.json`
 project file, you add the TrueX dependency as follows:
+
 ```sh
 npm add @truex/ad-renderer
 ```
+
 this will add an entry in the `"dependencies"` section in the `package.json` file, something like:
+
 ```json
     "dependencies": {
         "@truex/ad-renderer": "1.11.0",
 ```
 You then build and run their web app like usual, e.g. invoking `npm start` for webpack-based projects.
 
-Alternatively, if you prefer you can refer to the TAR library directly in a script tag, e.g.
+Alternatively, if you prefer you can refer to the TAR library directly in a script tag, e.g.:
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@truex/ad-renderer@1.11.0"></script>
 ```
+
 or if you want to always refer to the latest version:
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@truex/ad-renderer@latest"></script>
 ```
@@ -111,7 +117,7 @@ on the returned VAST ad.
 Please work with your Infillion point of contact if you have difficulty identifying the right approach to detecting the 
 TrueX placeholder, which will be the trigger point for the ad experience.
 
-Once the player reaches a TrueX placeholder, it should pause, instantiate a `TruexAdRenderer` instasnce and 
+Once the player reaches a TrueX placeholder, it should pause, instantiate a `TruexAdRenderer` instance and 
 invoke the [`init`](#init) and [`start`](#start) methods.
 
 Alternatively, you can call `init` on the `TruexAdRenderer` in preparation for an upcoming placeholder, pre-loading the ad. This will give the `TruexAdRenderer` more time to complete its initial ad request, and will help streamline TrueX load time and minimize wait time for your users. Once the player reaches a placeholder, it can then call `start` to notify the renderer that it can display the unit to the user.
@@ -294,7 +300,7 @@ This should be called by the host app code in order to initialize the `TruexAdRe
 The renderer will use the VAST config url passed to it in the constructor and make a request to the TrueX ad server 
 to see what ads are available.
 
-You may initialize `TruexAdRenderer` early (event a few seconds before the next pod even starts) in order to give it extra 
+You may initialize `TruexAdRenderer` early (a few seconds before the next pod even starts) in order to give it extra 
 time to make the ad request. The renderer will output an `adFetchCompleted` event at completion of this ad request. 
 This event can be used to facilitate the implementation of a timeout or loading indicator, and when to make the call to `start`.
 
