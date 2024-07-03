@@ -82,14 +82,14 @@ this will add an entry in the `"dependencies"` section in the `package.json` fil
 
 ```json
     "dependencies": {
-        "@truex/ad-renderer": "1.11.0",
+        "@truex/ad-renderer": "1.12.5",
 ```
 You then build and run their web app like usual, e.g. invoking `npm start` for webpack-based projects.
 
 Alternatively, if you prefer you can refer to the TAR library directly in a script tag, e.g.:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@truex/ad-renderer@1.11.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@truex/ad-renderer@1.12.5"></script>
 ```
 
 or if you want to always refer to the latest version:
